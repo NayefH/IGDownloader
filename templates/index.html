@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#030705" />
+
+    <link rel="stylesheet" href="/static/style.css" />
+    <script src="/static/app.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section class="card download-card" aria-label="Download Instagram media">
+        <form id="download-form">
+          <label for="username">Profile</label>
+          <div class="input-wrap">
+            <span>@</span
+            ><input
+              id="username"
+              name="username"
+              placeholder="username"
+              autocomplete="off"
+              required
+              maxlength="31"
+              spellcheck="false"
+            />
+          </div>
+          <button id="find-profile" class="secondary" type="button">
+            Find profile
+          </button>
+          <div id="profile-preview" class="profile-preview" hidden>
+            <img
+              id="profile-avatar"
+              alt="Profile picture"
+              width="48"
+              height="48"
+              hidden
+            /><span id="profile-name"></span>
+          </div>
+          <p id="profile-error" class="auth-error" role="alert" hidden></p>
+          <fieldset class="media-options source-options">
+            <legend>Content</legend>
+            <label
+              ><input
+                type="checkbox"
+                name="sources"
+                value="posts"
+                checked
+              /><span>Posts</span></label
+            >
+            <label
+              ><input type="checkbox" name="sources" value="stories" /><span
+                >Current story</span
+              ></label
+            >
+            <label
+              ><input type="checkbox" name="sources" value="highlights" /><span
+                >Highlights</span
+              ></label
+            >
+          </fieldset>
+          <p class="hint">Stories and highlights require login.</p>
+          <fieldset class="media-options">
+            <legend>Choose media before downloading</legend>
+            <label
+              ><input
+                type="radio"
+                name="media_type"
+                value="photos"
+                checked
+              /><span>Photos</span></label
+            >
+            <label
+              ><input type="radio" name="media_type" value="videos" /><span
+                >Videos</span
+              ></label
+            >
+            <label
+              ><input type="radio" name="media_type" value="both" /><span
+                >Both</span
+              ></label
+            >
+          </fieldset>
+          <button id="submit" type="submit">
+            Download ZIP <span aria-hidden="true">&#8595;</span>
+          </button>
+        </form>
+        <div id="status" class="status" role="status" aria-live="polite" hidden>
+          <p id="message"></p>
+          <progress id="progress" aria-label="Posts processed"></progress>
+          <div id="counts"></div>
+          <a id="zip-link" hidden>Save ZIP &#8595;</a>
+          <button id="cancel-download" class="secondary" type="button" hidden>
+            Cancel Download
+          </button>
+          <button id="retry" class="secondary" type="button" hidden>
+            Retry status
+          </button>
+        </div>
+      </section>
+      <section class="card auth-card" aria-labelledby="auth-title">
+        <div class="card-heading">
+          <h2 id="auth-title">Instagram login</h2>
+          <span class="optional">OPTIONAL</span>
+        </div>
+        <p id="auth-state" class="auth-state" role="status" aria-live="polite">
+          Checking session...
+        </p>
+        <form id="login-form" hidden>
+          <label for="login-username">Username</label>
+          <div class="input-wrap">
+            <span>@</span
+            ><input
+              id="login-username"
+              name="username"
+              autocomplete="username"
+              required
+              maxlength="31"
+              spellcheck="false"
+            />
+          </div>
+          <label for="login-password">Password</label>
+          <div class="input-wrap">
+            <input
+              id="login-password"
+              name="password"
+              type="password"
+              autocomplete="current-password"
+              required
+              maxlength="1024"
+            />
+          </div>
+          <button id="login-submit" class="secondary" type="submit">
+            Sign in
+          </button>
+        </form>
+        <form id="browser-login-form">
+          <label for="browser-username">Browser login</label>
+          <div class="browser-row">
+            <div class="input-wrap">
+              <span>@</span
+              ><input
+                id="browser-username"
+                name="username"
+                autocomplete="username"
+                required
+                maxlength="31"
+                spellcheck="false"
+                placeholder="your username"
+              />
+            </div>
+            <button id="browser-submit" class="secondary" type="submit">
+              Open Instagram &#8599;
+            </button>
+          </div>
+        </form>
+        <form id="two-factor-form" hidden>
+          <label for="two-factor-code">Verification code</label>
+          <div class="input-wrap">
+            <input
+              id="two-factor-code"
+              name="code"
+              inputmode="numeric"
+              autocomplete="one-time-code"
+              pattern="[0-9]{6,8}"
+              minlength="6"
+              maxlength="8"
+              required
+              aria-describedby="code-hint"
+            />
+          </div>
+          <p id="code-hint" class="hint">Use your authenticator or SMS code.</p>
+          <button id="code-submit" type="submit">Verify</button>
+        </form>
+        <button id="logout" class="secondary" type="button" hidden>
+          Sign out
+        </button>
+        <button id="auth-refresh" class="secondary" type="button" hidden>
+          Refresh session
+        </button>
+        <p id="auth-error" class="auth-error" role="alert" hidden></p>
+      </section>
+    </main>
+  </body>
+</html>
